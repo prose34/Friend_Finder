@@ -45,16 +45,18 @@ module.exports = function(app){
       var scoresDiff = 0;
       //run through scores to compare friends
       for(var j=0; j<newFriendScores.length; j++){
-        scoresDiff += (Math.abs(friendList[i].scores[j]) - newFriendScores[j]);
+        scoresDiff += Math.abs(friendList[i].scores[j] - newFriendScores[j]);
       }
+      console.log(scoresDiff, friendList[i].name);
+
 
       //push results into scoresArray
       scoresArray.push(scoresDiff);
     }
-
+    
     //after all friends are compared, find best match
     for(var i=0; i<scoresArray.length; i++){
-      if(scoresArray[i] <= scoresArray[bestMatch]){
+      if(scoresArray[i] <= bestMatch){
         bestMatch = i;
       }
     }
