@@ -9,7 +9,7 @@
 // These data sources hold arrays of information on potential friends.
 // ===============================================================================
 
-var friendList = require('../data/friend.js');
+var friendList = require('../data/friends.js');
 
 // ===============================================================================
 // ROUTING
