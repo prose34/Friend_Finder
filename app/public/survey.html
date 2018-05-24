@@ -5,10 +5,11 @@
   <meta charset="UTF-8">
   <title>Survey Page</title>
 
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
@@ -153,13 +154,13 @@
     <br>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
+    <button type="submit" data-target="results-modal" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
      Submit</button>
 
     <hr>
     <footer class="footer">
       <div class="container">
-        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/prose34/Friend_Finder">GitHub Repo</a></p>
+        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/prose34/Friend_Finder" target='_blank'>GitHub Repo</a></p>
       </div>
     </footer>
 
@@ -172,7 +173,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal"></button>
           <h2 class="modal-title"><strong>Best Match</strong></h2>
         </div>
         <div class="modal-body">
@@ -219,8 +220,8 @@
         $(".form-control").each(function() {
           if ($(this).val() === "") {
             isValid = false;
-          }
-        })
+          };
+        });
 
         $(".chosen-select").each(function() {
           if ($(this).val() === "") {
@@ -235,7 +236,7 @@
         // Create an object for the user"s data
         var newFriend = {
           name: $("#name").val().trim(),
-          photo: $("#photo").val().trim(),
+          profilePic: $("#photo").val().trim(),
           scores: [
             $("#q1").val(),
             $("#q2").val(),
@@ -250,19 +251,39 @@
           ]
         };
 
+        //Grabs current URL of website
+        var currentURL = window.location.origin;
+
         // AJAX post the data to the friends API.
-        $.post("/api/friends", newFriend, function(data) {
+        $.post(currentURL + "/api/friends", newFriend, function(data) {
 
           // Grab the result from the AJAX post so that the best match's name and photo are displayed.
           $("#match-name").text(data.name);
-          $("#match-img").attr("src", data.photo);
+          $("#match-img").attr("src", data.profilePic);
 
-          // Show the modal with the best match
-          $("#results-modal").modal("toggle");
+        });  
 
-        });
+        // Show the modal with the best match
+        $("#results-modal").modal();
+
+        //clear form after submission
+        $('#name').val("");
+        $('#photo').val("");
+        $('#q1').val("");
+        $('#q2').val("");
+        $('#q3').val("");
+        $('#q4').val("");
+        $('#q5').val("");
+        $('#q6').val("");
+        $('#q7').val("");
+        $('#q8').val("");
+        $('#q9').val("");
+        $('#q10').val("");
+  
       } else {
-        alert("Please fill out all fields before submitting!");
+
+        alert("Please fill out all fields before submitting.");
+
       }
     });
   </script>

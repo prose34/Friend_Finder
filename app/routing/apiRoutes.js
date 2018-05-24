@@ -38,7 +38,6 @@ module.exports = function(app){
     //grabs the new friend's scores to compare with friends in friendList array
     var newFriendScores = req.body.scores;
     var scoresArray = [];
-    var friendCount = 0;
     var bestMatch = 0;
 
     //runs through all current friends in list
@@ -46,7 +45,7 @@ module.exports = function(app){
       var scoresDiff = 0;
       //run through scores to compare friends
       for(var j=0; j<newFriendScores.length; j++){
-        scoresDiff += (Math.abs(parseInt(friendList[i].scores[j]) - parseInt(newFriendScores[j])));
+        scoresDiff += (Math.abs(friendList[i].scores[j]) - newFriendScores[j]);
       }
 
       //push results into scoresArray
@@ -61,8 +60,8 @@ module.exports = function(app){
     }
 
     //return bestMatch data
-    var bff = friendList[bestMatch];
-    res.json(bff);
+    var closestMatch = friendList[bestMatch];
+    res.json(closestMatch);
 
     //pushes new submission into the friendsList array
     friendList.push(req.body);
