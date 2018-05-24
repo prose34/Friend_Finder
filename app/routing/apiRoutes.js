@@ -56,7 +56,7 @@ module.exports = function(app){
     
     //after all friends are compared, find best match
     for(var i=0; i<scoresArray.length; i++){
-      if(scoresArray[i] <= bestMatch){
+      if(scoresArray[i] <= scoresArray[bestMatch]){
         bestMatch = i;
       }
     }
