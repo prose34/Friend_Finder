@@ -25,11 +25,11 @@ var friendList = [
       profilePic: 'https://hips.hearstapps.com/hbz.h-cdn.co/assets/cm/14/52/768x768/5499934cd8ef3_-_hbz-beauty-secrets-lupiita-promo-lgn.jpg?resize=480:*',
       scores: [1, 4, 5, 5, 4, 4, 2, 4, 4, 5]
     }, 
-    {
-      name: 'peter',
-      profilePic: '',
-      scores: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
-    }, 
+    // {
+    //   name: 'peter',
+    //   profilePic: '',
+    //   scores: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+    // }, 
   ]
   
   module.exports = friendList;
